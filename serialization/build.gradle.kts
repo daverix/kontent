@@ -3,7 +3,11 @@ plugins {
 
     kotlin("android")
     kotlin("plugin.serialization")
+    `maven-publish`
 }
+
+group = "net.daverix.kontent"
+version = "0.1-SNAPSHOT"
 
 android {
     compileSdkVersion(30)
@@ -32,4 +36,21 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
     androidTestImplementation("io.strikt:strikt-core:0.30.0")
+}
+
+val androidSourceJar by tasks.registering(Jar::class) {
+    from(android.sourceSets["main"].java.srcDirs)
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            register<MavenPublication>("library") {
+                from(components["release"])
+                artifact(androidSourceJar) {
+                    classifier = "sources"
+                }
+            }
+        }
+    }
 }
