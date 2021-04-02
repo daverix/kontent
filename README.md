@@ -44,7 +44,7 @@ val people: List<Person> = Kontent.deserializeFromCursor(cursor)
 ```
 
 When implementing a content provider, this can be used to serialize a single instance to a 
-MatrixCursor with one value:
+MatrixCursor with one row:
 ```kotlin
 val person = Person("David")
 val cursor = Kontent.serializeToCursor(person)

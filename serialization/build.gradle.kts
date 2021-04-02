@@ -47,6 +47,8 @@ afterEvaluate {
         publications {
             register<MavenPublication>("library") {
                 from(components["release"])
+                artifactId = "kontent-serialization"
+
                 artifact(androidSourceJar) {
                     classifier = "sources"
                 }
